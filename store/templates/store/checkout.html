@@ -35,11 +35,13 @@
                     <input style="color:white; background-color:rgb(39, 41, 41); border:none;" id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
                 </form>
             </div>
-            
+            <br>
+            <div class="box-element hidden" id="payment-info">
+                <small>Paypal Option</small>
+                <button id="make-payment">Make Payment</button>
+            </div>
         </div>
-        <!-- <div class="box-element hidden" id="payment-info">
-            <small>Paypal Option</small>
-        </div> -->
+        
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
                 <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
@@ -64,5 +66,20 @@
 
         </div>
     </div>
+    <script>
+        var shipping = '{{order.shipping}}'
+        if(shipping=='False')
+        {
+            document.getElementById('shipping-info').innerHTML=''
+        }
+        form = document.getElementById('form')
+        form.addEventListener('submit',function(e){
+            e.preventDefault()
+            console.log('form submitted...')
+            document.getElementById('form-button').classList.add('hidden')
+            document.getElementById('payment-info').classList.remove('hidden')
+
+        })
+    </script>
 </div>
 {% endblock %}
